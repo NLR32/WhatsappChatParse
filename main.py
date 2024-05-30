@@ -26,7 +26,7 @@ def parse_name(input_string):
 #     return matches
 
 def parse():
-    file = open('/Users/levrose/Downloads/_chat.txt','r')
+    file = open('FILEPATH','r')
     lines = file.readlines()
 
     text_dict = {'temp': 0}
