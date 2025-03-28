@@ -4,20 +4,15 @@ import re
 
 # Finds person who texted
 def parse_name(input_string):
-    # Remove all U+200E characters
-    input_string = input_string.replace('\u200e', '')
+    start_index = input_string.find("M] ") + len("M] ")
+    end_index = input_string.find(":", start_index)
 
-    pattern = r"^[[]\d{1,2}[\/]\d{1,2}[\/]\d{1,2}, \d{1,2}:\d{1,2}:\d{1,2} (AM|PM)[]] "
-    match = re.match(pattern, input_string)
+    if start_index != -1 and end_index != -1:
+        parsed_string = input_string[start_index:end_index].strip()
+        return parsed_string
+    else:
+        return None
 
-    if match:
-        start_index = match.end()
-        end_index = input_string.find(":", start_index)
-
-        if end_index != -1:
-            return input_string[start_index:end_index].strip()
-
-    return None
 
 
 # def parse_for_length(file_path):
@@ -31,7 +26,7 @@ def parse_name(input_string):
 #     return matches
 
 def parse():
-    file = open('<FILE>','r')
+    file = open('/Users/levrose/Downloads/_chat.txt','r')
     lines = file.readlines()
 
     text_dict = {'temp': 0}
@@ -98,3 +93,4 @@ def parse():
 if __name__ == '__main__':
     parse()
 
+# See PyCharm help at https://www.jetbrains.com/help/pycharm/
